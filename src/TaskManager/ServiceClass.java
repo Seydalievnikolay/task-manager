@@ -1,6 +1,9 @@
+package TaskManager;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,10 +18,12 @@ public class ServiceClass {
         tasks.add(new Task(title, description, type, taskRepeat ,dateTime));
         System.out.println("Задача добавлена");
     }
-    public static void addTask(Task task ) {
-        tasks.add(task);
+
+    public void addTask(Task task1) {
         System.out.println("Задача добавлена");
     }
+
+
 
 
     public static void removeTaskById(String id) {
@@ -27,10 +32,11 @@ public class ServiceClass {
     }
 
     public static List<Task> getTasksForTomorrow() {
-        //Date tomorrowDate = new Date(new Date().getTime()+86400000);
-        LocalDateTime currentDT = LocalDateTime.now().plusDays(1);
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DATE, +1);
+        System.out.println(c.getTime());
 
-        return tasks.stream().filter(item -> item.dateTime.compareTo(currentDT)==0).toList();
+        return (List<Task>) c;
     }
 
     public static List<Task> getTasks() {
@@ -39,6 +45,16 @@ public class ServiceClass {
 
     public static void removeTask(Task t ) {
         tasks.removeIf(task -> task ==t);
+    }
+
+    public static List<Task> getArchivedTasks () {
+        for (Task task : serviceClass.getTasks()) {
+            System.out.println(task.getTitle());
+        }
+    }
+
+    public static List<Task> getTasksGroupeByDates() {
+
     }
 
 
@@ -53,5 +69,4 @@ public class ServiceClass {
         }
         return dueTasks;
     }
-
 }

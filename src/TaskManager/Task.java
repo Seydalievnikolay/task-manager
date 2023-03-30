@@ -1,3 +1,5 @@
+package TaskManager;
+
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
@@ -13,6 +15,13 @@ public class Task {
     public LocalDateTime dateTime;
 
 
+    public Task(String title, String description, LocalDateTime startTime, LocalDateTime endTime) {
+        this.title = title;
+        this.description = description;
+        this.dateTime = startTime;
+        this.dateTime = endTime;
+    }
+
     public Task(String title, String description, Type type, TaskRepeat taskRepeat, LocalDateTime dateTime) {
         this.id = Integer.parseInt(UUID.randomUUID().toString());
         this.title = title;
@@ -20,10 +29,6 @@ public class Task {
         this.type = type;
         this.taskRepeat = taskRepeat;
         this.dateTime = LocalDateTime.now();
-    }
-
-    public Task(String title, String description, LocalDateTime startTime, LocalDateTime endTime) {
-        this.dateTime = startTime;
     }
 
     public String getTitle() {
@@ -97,7 +102,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
+        return "TaskManager.Task{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
