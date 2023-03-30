@@ -1,11 +1,7 @@
 package TaskManager;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class ServiceClass {
     private static List<Task> tasks;
@@ -48,25 +44,23 @@ public class ServiceClass {
     }
 
     public static List<Task> getArchivedTasks () {
-        for (Task task : serviceClass.getTasks()) {
+        for (Task task : ServiceClass.getTasks()) {
             System.out.println(task.getTitle());
         }
-    }
-
-    public static List<Task> getTasksGroupeByDates() {
-
+        return tasks;
     }
 
 
-
-    public static List<Task> getTasksForDate(LocalDate date) {
+    public static List<Task> getTasksForDate() {
         List<Task> dueTasks = new ArrayList<>();
         for (Task task : tasks) {
             LocalDateTime nextDate = task.getNextDate();
-            if (nextDate != null && nextDate.toLocalDate().equals(date)) {
+            if (nextDate != null && nextDate.toLocalDate().equals(nextDate)) {
                 dueTasks.add(task);
             }
         }
         return dueTasks;
     }
+
+
 }

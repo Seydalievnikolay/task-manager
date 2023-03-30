@@ -48,7 +48,7 @@ public class TaskManagerApp {
                     boolean taskRemoved = false;
                     for (Task id : serviceClass.getTasks()) {
                         if (id.getTitle().equals(titleToRemove)) {
-                            serviceClass.removeTaskById(id);
+                            serviceClass.removeTaskById(String.valueOf(id));
                             System.out.println("Задача успешно удалена");
                             taskRemoved = true;
                             break;
@@ -65,6 +65,13 @@ public class TaskManagerApp {
                     }
                     break;
                 case 4:
+                    System.out.println("Список архивных задач");
+                    for (Task task :serviceClass.getArchivedTasks())
+                        System.out.println(task.getTitle());
+                case 5:
+                    System.out.println("Список сгруппированный по датам");
+                    serviceClass.getTasksForDate();
+                case 6:
                     System.out.println("До свидания!");
                     break;
                 default:
