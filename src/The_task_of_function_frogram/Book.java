@@ -1,58 +1,56 @@
 package The_task_of_function_frogram;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.regex.PatternSyntaxException;
+
+import static java.lang.Integer.reverse;
 
 public class Book {
     public static void main(String[] args) {
-        Scanner scan;
+        String message;
         String text;
-        String[] textArray;
+        String[]textArray;
+        int wordCount = 0;
+        System.out.println("Введите предложение: ");
+        Scanner sc = new Scanner(System.in);
+        text = sc.nextLine();
+        textArray = text.split("[-.?!) (,:]");
+        wordCount = textArray.length;
 
-        int sentenceCount = 0;
-        int wordsCount = 0;
-        int wordsCounttmp = 0;
-        int indexSentenceWord = 0;
-        int lettersCount = 0;
-        int lettersCounttmp = 0;
-        int indexSentenceLetter = 0;
+        {
+            System.out.println(" В тексте " + wordCount + " слов");
+        }
+        message = sc.nextLine();
+        try {
+            String[] words = message.replaceAll("[-.?!)(,:]", "").split("\\s");
+            Map<String, Integer> counter = new HashMap<>();
+            Arrays.sort(words);
+            for (String i : words) {
+                if (!i.isEmpty()) {
+                    Integer count = counter.get(i);
 
-        System.out.println("Введите текст:");
+                    if (count == null) {
+                        count = 0;
 
-        scan = new Scanner(System.in);
-        text = scan.nextLine();
+                    }
+                    counter.put(i, ++count);
+                    reverse(count);
 
-        textArray = text.split("[.?!]");
-        sentenceCount = textArray.length;
-
-        for(int i = 0; i < sentenceCount; i++) {
-            wordsCounttmp = textArray[i].split(" ").length;
-
-            if(wordsCounttmp > wordsCount) {
-                wordsCount = wordsCounttmp;
-                indexSentenceWord = i;
-            }
-            String[] wordsArr = textArray[i].split(" ");
-            for(String word : wordsArr) {
-                lettersCounttmp = lettersCounter(word);
-
-                if(lettersCounttmp > lettersCount) {
-                    lettersCount = lettersCounttmp;
-                    indexSentenceLetter = i;
                 }
             }
+
+            System.out.println("ТОП 10:");
+            for (String j : counter.keySet()) {
+                System.out.println(counter.get(j) + " - " + j);
+            }
         }
-
-        System.out.println("Количество предложений:\n" + sentenceCount + "\n" +
-                "Предложение с максимальным количеством слов:\n" + textArray[indexSentenceWord] + "\n" +
-                "Предложение, которое содержит слово с максимальным количеством букв:\n" + textArray[indexSentenceLetter]);
-
+        catch (PatternSyntaxException e){
+            System.out.println("Ошибка регулярного выражения!");
+            e.printStackTrace();
+        }
     }
-    private static int lettersCounter(String word) {
-        int count = 0;
 
-        word = word.replaceAll("[“:”,-_\"';()]", "");
-        count = word.length();
-
-        return count;
-    }
 }
