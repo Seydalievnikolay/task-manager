@@ -1,6 +1,7 @@
 package TaskManager;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
@@ -30,9 +31,9 @@ public class TaskManagerApp {
                     while (!validInput) {
                         try {
                             System.out.print("Введите дату и время начала выполнения задачи (yyyy-MM-dd HH:mm): ");
-                            startTime = LocalDateTime.parse(scanner.nextLine());
+                            startTime = LocalDateTime.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
                             System.out.print("Введите дату и время окончания выполнения задачи (yyyy-MM-dd HH:mm): ");
-                            endTime = LocalDateTime.parse(scanner.nextLine());
+                            endTime = LocalDateTime.parse(scanner.nextLine(), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
                             validInput = true;
                         } catch (DateTimeParseException e) {
                             System.out.println("Ошибка ввода даты и времени, попробуйте еще раз");
@@ -43,6 +44,22 @@ public class TaskManagerApp {
                     System.out.println("Задача успешно добавлена");
                     break;
                 case 2:
+                    System.out.print("Введите название задачи для редактирования: ");
+                    String titleToEdit = scanner.nextLine();
+                    boolean taskToEdit = false;
+                    for (Task id : serviceClass.setTasks()) {
+                        if (id.getTitle().equals(titleToEdit)) {
+                            serviceClass.addTask(task1);
+                            System.out.println("Задача успешно отредактирована");
+                            taskToEdit = true;
+                            break;
+                        }
+                    }
+                    if (!taskToEdit) {
+                        System.out.println("Задача с таким названием не найдена");
+                    }
+                    break;
+                    case 3:
                     System.out.print("Введите название задачи для удаления: ");
                     String titleToRemove = scanner.nextLine();
                     boolean taskRemoved = false;
@@ -58,20 +75,20 @@ public class TaskManagerApp {
                         System.out.println("Задача с таким названием не найдена");
                     }
                     break;
-                case 3:
+                case 4:
                     System.out.println("Список задач на завтра:");
                     for (Task t : serviceClass.getTasksForTomorrow()) {
                         System.out.println(t.getTitle());
                     }
                     break;
-                case 4:
+                case 5:
                     System.out.println("Список архивных задач");
                     for (Task task :serviceClass.getArchivedTasks())
                         System.out.println(task.getTitle());
-                case 5:
+                case 6:
                     System.out.println("Список сгруппированный по датам");
                     serviceClass.getTasksForDate();
-                case 6:
+                case 7:
                     System.out.println("До свидания!");
                     break;
                 default:

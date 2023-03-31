@@ -1,6 +1,7 @@
 package TaskManager;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class ServiceClass {
@@ -10,7 +11,7 @@ public class ServiceClass {
         tasks = new ArrayList<>();
     }
 
-    public static void addTask(String title, String description, Type type, TaskRepeat taskRepeat, LocalDateTime dateTime) {
+    public  void addTask(String title, String description, Type type, TaskRepeat taskRepeat, LocalDateTime dateTime) {
         tasks.add(new Task(title, description, type, taskRepeat ,dateTime));
         System.out.println("Задача добавлена");
     }
@@ -28,14 +29,15 @@ public class ServiceClass {
     }
 
     public static List<Task> getTasksForTomorrow() {
-        Calendar c = Calendar.getInstance();
-        c.add(Calendar.DATE, +1);
-        System.out.println(c.getTime());
-
-        return (List<Task>) c;
+        LocalDateTime.parse(tasks);
+        return (List<Task>) ;
     }
 
     public static List<Task> getTasks() {
+        return tasks;
+    }
+
+    public static List<Task> setTasks() {
         return tasks;
     }
 
