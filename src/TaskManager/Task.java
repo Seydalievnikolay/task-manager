@@ -14,6 +14,8 @@ public class Task {
     private TaskRepeat taskRepeat;
     public LocalDateTime dateTime;
 
+    private LocalDateTime endDate;
+
 
     public Task(String title, String description, LocalDateTime startTime, LocalDateTime endTime) {
         this.title = title;
@@ -22,13 +24,29 @@ public class Task {
         this.dateTime = endTime;
     }
 
-    public Task(String title, String description, Type type, TaskRepeat taskRepeat, LocalDateTime dateTime) {
+    public Task(int id,String title, String description, Type type, TaskRepeat taskRepeat, LocalDateTime dateTime) {
         this.id = Integer.parseInt(UUID.randomUUID().toString());
         this.title = title;
         this.description = description;
         this.type = type;
         this.taskRepeat = taskRepeat;
         this.dateTime = LocalDateTime.now();
+    }
+
+    public Task(LocalDateTime endDate) {
+        this.endDate = endDate;
+    }
+
+    public LocalDateTime getEndDate() {
+        return endDate;
+    }
+
+    public boolean isArchived() {
+        return LocalDateTime.now().isAfter(endDate);
+    }
+
+    public void setEndDate(LocalDateTime endDate) {
+        this.endDate = endDate;
     }
 
     public String getTitle() {
