@@ -25,7 +25,7 @@ public class ServiceClass {
 
 
 
-    public  void removeTaskById(String id) {
+    public  void removeTaskById(int id) {
         tasks.removeIf(task -> Objects.equals(task.getId(), id));
         System.out.println("Задача удалена");
     }

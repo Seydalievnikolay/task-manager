@@ -33,6 +33,14 @@ public class Task {
         this.dateTime = LocalDateTime.now();
     }
 
+    public Task(String title, String description, Type type, TaskRepeat taskRepeat, LocalDateTime dateTime) {
+        this.title = title;
+        this.description = description;
+        this.type = type;
+        this.taskRepeat = taskRepeat;
+        this.dateTime = dateTime;
+    }
+
     public Task(LocalDateTime endDate) {
         this.endDate = endDate;
     }
